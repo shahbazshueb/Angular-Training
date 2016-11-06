@@ -8,26 +8,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var app_component_1 = require('./app.component');
-var forms_1 = require("@angular/forms");
-var hero_detail_component_1 = require("./hero-detail.component");
-var AppModule = (function () {
-    function AppModule() {
-    }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [
-                platform_browser_1.BrowserModule,
-                forms_1.FormsModule
-            ],
-            declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent],
-            bootstrap: [app_component_1.AppComponent]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
-}());
+///<reference path="dashboard.component.ts"/>
+const core_1 = require('@angular/core');
+const platform_browser_1 = require('@angular/platform-browser');
+const app_component_1 = require('./app.component');
+const forms_1 = require("@angular/forms");
+const hero_detail_component_1 = require("./hero-detail.component");
+const heroes_component_1 = require("./heroes.component");
+const hero_services_1 = require("./hero.services");
+const router_1 = require('@angular/router');
+const dashboard_component_1 = require("./dashboard.component");
+let AppModule = class AppModule {
+};
+AppModule = __decorate([
+    core_1.NgModule({
+        imports: [
+            platform_browser_1.BrowserModule,
+            forms_1.FormsModule,
+            router_1.RouterModule.forRoot([
+                {
+                    path: '',
+                    redirectTo: '/dashboard',
+                    pathMatch: 'full'
+                },
+                {
+                    path: 'heroes',
+                    component: heroes_component_1.HeroesComponent
+                },
+                {
+                    path: 'dashboard',
+                    component: dashboard_component_1.DashboardComponent
+                }
+            ])
+        ],
+        declarations: [app_component_1.AppComponent, hero_detail_component_1.HeroDetailComponent, heroes_component_1.HeroesComponent, dashboard_component_1.DashboardComponent],
+        providers: [hero_services_1.HeroService],
+        bootstrap: [app_component_1.AppComponent]
+    }), 
+    __metadata('design:paramtypes', [])
+], AppModule);
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

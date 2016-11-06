@@ -9,21 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 /**
- * Created by shahbaz.ali on 11/4/2016.
+ * Created by shahbazshueb on 11/7/16.
  */
 const core_1 = require('@angular/core');
-const mock_heroes_1 = require("./mock-heroes");
-let HeroService = class HeroService {
-    getHeroes() {
-        return Promise.resolve(mock_heroes_1.HEROES);
-    }
-    getHeroesSlowly() {
-        return new Promise(resolve => setTimeout(resolve, 2000)).then(() => this.getHeroes());
-    }
+let DashboardComponent = class DashboardComponent {
 };
-HeroService = __decorate([
-    core_1.Injectable(), 
+DashboardComponent = __decorate([
+    core_1.Component({
+        selector: 'my-dashboard',
+        template: '<h3>My Dashboard </h3>'
+    }), 
     __metadata('design:paramtypes', [])
-], HeroService);
-exports.HeroService = HeroService;
-//# sourceMappingURL=hero.services.js.map
+], DashboardComponent);
+exports.DashboardComponent = DashboardComponent;
+//# sourceMappingURL=dashboard.component.js.map

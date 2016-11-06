@@ -1,6 +1,3 @@
-/**
- * Created by shahbaz.ali on 11/4/2016.
- */
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -11,19 +8,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = "Tour of Heroes";
+const core_1 = require('@angular/core');
+let AppComponent = class AppComponent {
+    constructor() {
+        this.title = 'Tour of Heroes';
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            template: "\n        <h1>{{title}}</h1>\n        <my-heroes></my-heroes>\n    "
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
-}());
+};
+AppComponent = __decorate([
+    core_1.Component({
+        selector: 'my-app',
+        template: `
+     <h1>{{title}}</h1>
+     <nav>
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/heroes">Heroes</a>
+     </nav>
+     <router-outlet></router-outlet>
+   `
+    }), 
+    __metadata('design:paramtypes', [])
+], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map
