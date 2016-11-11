@@ -12,14 +12,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by shahbazshueb on 11/7/16.
  */
 const core_1 = require('@angular/core');
+const hero_services_1 = require('./hero.services');
 let DashboardComponent = class DashboardComponent {
+    constructor(heroservice) {
+        this.heroservice = heroservice;
+        this.heroes = [];
+    }
+    ngOnInit() {
+        this.heroservice.getHeroes()
+            .then(heroes => this.heroes = heroes.slice(1, 5));
+    }
 };
 DashboardComponent = __decorate([
     core_1.Component({
+        moduleId: module.id,
         selector: 'my-dashboard',
-        template: '<h3>My Dashboard </h3>'
+        templateUrl: 'dashboard.component.html',
+        styleUrls: ['./dashboard.component.css']
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [hero_services_1.HeroService])
 ], DashboardComponent);
 exports.DashboardComponent = DashboardComponent;
 //# sourceMappingURL=dashboard.component.js.map

@@ -9,10 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
+const router_1 = require('@angular/router');
 const hero_services_1 = require("./hero.services");
 let HeroesComponent = class HeroesComponent {
-    constructor(heroService) {
+    constructor(heroService, router) {
         this.heroService = heroService;
+        this.router = router;
         this.title = 'Tour of Heroes';
     }
     onSelect(hero) {
@@ -20,78 +22,26 @@ let HeroesComponent = class HeroesComponent {
     }
     ;
     getHeroes() {
-        this.heroService.getHeroesSlowly().then(heroes => this.heroes = heroes);
+        this.heroService.getHeroes().then(heroes => this.heroes = heroes);
     }
+    ;
     ngOnInit() {
         this.getHeroes();
     }
     ;
+    gotoDetails() {
+        this.router.navigate(['/detail', this.selectedHero.id]);
+    }
 };
 HeroesComponent = __decorate([
     core_1.Component({
+        moduleId: module.id,
         selector: 'my-heroes',
         providers: [hero_services_1.HeroService],
-        template: `<h2>My Heroes</h2>
-                 <ul class="heroes">
-                    <li *ngFor="let hero of heroes"  [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-                    <span class="badge">{{hero.id}}</span> {{hero.name}}
-                    </li>
-                 </ul>
-                 <my-hero-detail [hero]="selectedHero">
-                 
-                 </my-hero-detail>
-                `,
-        styles: [`
-  .selected {
-    background-color: #CFD8DC !important;
-    color: white;
-  }
-  .heroes {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
-  }
-  .heroes li {
-    cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
-  }
-  .heroes li.selected:hover {
-    background-color: #BBD8DC !important;
-    color: white;
-  }
-  .heroes li:hover {
-    color: #607D8B;
-    background-color: #DDD;
-    left: .1em;
-  }
-  .heroes .text {
-    position: relative;
-    top: -3px;
-  }
-  .heroes .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
-  }
-`]
+        templateUrl: './heroes.component.html',
+        styleUrls: ['./heroes.component.css']
     }), 
-    __metadata('design:paramtypes', [hero_services_1.HeroService])
+    __metadata('design:paramtypes', [hero_services_1.HeroService, router_1.Router])
 ], HeroesComponent);
 exports.HeroesComponent = HeroesComponent;
 //# sourceMappingURL=heroes.component.js.map

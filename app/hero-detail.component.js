@@ -12,8 +12,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by shahbaz.ali on 11/4/2016.
  */
 const core_1 = require('@angular/core');
+const router_1 = require('@angular/router');
+const common_1 = require('@angular/common');
+const hero_services_1 = require('./hero.services');
 const hero_1 = require('./hero');
 let HeroDetailComponent = class HeroDetailComponent {
+    constructor(heroService, location, route) {
+        this.heroService = heroService;
+        this.location = location;
+        this.route = route;
+    }
+    ngOnInit() {
+        this.route.params.forEach((params) => {
+            let id = +params['id'];
+            this.heroService.getHero(id)
+                .then(hero => this.hero = hero);
+        });
+    }
+    goBack() {
+        this.location.back();
+    }
 };
 __decorate([
     core_1.Input(), 
@@ -21,19 +39,12 @@ __decorate([
 ], HeroDetailComponent.prototype, "hero", void 0);
 HeroDetailComponent = __decorate([
     core_1.Component({
+        moduleId: module.id,
         selector: 'my-hero-detail',
-        template: `
-  <div *ngIf="hero">
-    <h2>{{hero.name}} details!</h2>
-    <div><label>id: </label>{{hero.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="hero.name" placeholder="name"/>
-    </div>
-  </div>
-`
+        templateUrl: './hero-detail.component.html',
+        styleUrls: ['./hero-detail.component.css']
     }), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [hero_services_1.HeroService, common_1.Location, router_1.ActivatedRoute])
 ], HeroDetailComponent);
 exports.HeroDetailComponent = HeroDetailComponent;
 //# sourceMappingURL=hero-detail.component.js.map

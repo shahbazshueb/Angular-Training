@@ -17,8 +17,12 @@ let HeroService = class HeroService {
     getHeroes() {
         return Promise.resolve(mock_heroes_1.HEROES);
     }
-    getHeroesSlowly() {
+    getHeroesSlowly(id) {
         return new Promise(resolve => setTimeout(resolve, 2000)).then(() => this.getHeroes());
+    }
+    getHero(id) {
+        return this.getHeroes()
+            .then(heroes => heroes.find(hero => hero.id == id));
     }
 };
 HeroService = __decorate([
