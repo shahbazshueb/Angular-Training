@@ -12,13 +12,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by shahbaz.ali on 11/4/2016.
  */
 const core_1 = require('@angular/core');
-const mock_heroes_1 = require("./mock-heroes");
+const http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 let HeroService = class HeroService {
-    getHeroes() {
-        return Promise.resolve(mock_heroes_1.HEROES);
+    constructor(http) {
+        this.http = http;
+        this.heroesUrl = 'app/heroes'; // URL to web api
     }
-    getHeroesSlowly(id) {
-        return new Promise(resolve => setTimeout(resolve, 2000)).then(() => this.getHeroes());
+    handleError(error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    }
+    getHeroes() {
+        return this.http.get(this.heroesUrl)
+            .toPromise()
+            .then(response => response.json().data)
+            .catch(this.handleError);
     }
     getHero(id) {
         return this.getHeroes()
@@ -27,7 +36,7 @@ let HeroService = class HeroService {
 };
 HeroService = __decorate([
     core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
+    __metadata('design:paramtypes', [http_1.Http])
 ], HeroService);
 exports.HeroService = HeroService;
 //# sourceMappingURL=hero.services.js.map
